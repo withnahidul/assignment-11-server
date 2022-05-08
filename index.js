@@ -26,10 +26,12 @@ function verifyJWT(req, res, next) {
 }
 
 const uri = `mongodb+srv://nahidul:lD9YpFNKZpai3krd@cluster0.xeolu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+console.log('db conncet');
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
+  
 });
 
 async function run() {
