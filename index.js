@@ -31,16 +31,13 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
-  
 });
 
 async function run() {
   try {
     await client.connect();
 
-    const inventoryCollection = client
-      .db("books")
-      .collection("inventory");
+    const inventoryCollection = client.db("books").collection("inventory");
     const itemList = client.db("books").collection("itemList");
 
     //Auth
@@ -67,12 +64,7 @@ async function run() {
       res.send(inventories);
     });
 
-    //post
-    app.post("/inventory", async (req, res) => {
-      const newInventory = req.body;
-      const result = await inventoryCollection.insertOne(newInventory);
-      res.send(result);
-    });
+
 
     //Delete Inventory
     app.delete("/inventory/:id", async (req, res) => {
