@@ -84,7 +84,18 @@ async function run() {
 
     //ItemsList API
 
-
+    app.get("/itemList", verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+      const email = req.query.email;
+      if (email === decodedEmail) {
+        const query = { email: email };
+        const cursor = itemList.find(query);
+        const items = await cursor.toArray();
+        res.send(items);
+      } else {
+        res.status(403).send({ message: "forbidden access" });
+      }
+    });
     app.post("/itemList", async (req, res) => {
       const items = req.body;
       const result = await itemList.insertOne(items);
