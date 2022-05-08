@@ -26,7 +26,7 @@ function verifyJWT(req, res, next) {
 }
 
 const uri = `mongodb+srv://nahidul:lD9YpFNKZpai3krd@cluster0.xeolu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-console.log('db conncet');
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -39,9 +39,9 @@ async function run() {
     await client.connect();
 
     const inventoryCollection = client
-      .db("yourDatabase")
-      .collection("database_name");
-    const itemList = client.db("yourcollection").collection("collection_name");
+      .db("books")
+      .collection("inventory");
+    const itemList = client.db("books").collection("itemList");
 
     //Auth
     app.post("/login", async (req, res) => {
